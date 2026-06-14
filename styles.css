@@ -195,9 +195,14 @@ body {
 .producto-nombre-short {
     font-weight: 600;
     text-align: center;
-    line-height: 1.1;
+    line-height: 1.2;
     color: var(--texto-primario);
-    font-size: 10px;
+    font-size: 11px;
+    word-wrap: break-word;
+    word-break: break-word;
+    margin: 0.25rem 0;
+    display: block;
+    overflow: visible;
 }
 
 .producto-precio {
