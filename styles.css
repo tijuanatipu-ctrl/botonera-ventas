@@ -162,12 +162,12 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    gap: 0.5rem;
+    justify-content: center;
+    gap: 0.25rem;
     font-size: 11px;
     position: relative;
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    min-height: 140px;
+    min-height: 160px;
     box-shadow: var(--sombra);
 }
 
@@ -193,16 +193,17 @@ body {
 }
 
 .producto-nombre-short {
-    font-weight: 600;
+    font-weight: 700;
     text-align: center;
-    line-height: 1.2;
+    line-height: 1.25;
     color: var(--texto-primario);
-    font-size: 11px;
+    font-size: 12px;
     word-wrap: break-word;
     word-break: break-word;
     margin: 0.25rem 0;
     display: block;
     overflow: visible;
+    min-height: 2.5rem;
 }
 
 .producto-precio {
