@@ -1075,9 +1075,12 @@ function abrirSelectorCliente() {
 
     modal.innerHTML = `
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header" style="justify-content: space-between;">
                 <h2>👤 Seleccionar Cliente</h2>
-                <button class="modal-cerrar" onclick="this.closest('.modal-overlay').remove()">✕</button>
+                <div style="display: flex; gap: 0.5rem;">
+                    ${clientesGuardados.length > 0 ? `<button onclick="exportarClientesGuardados()" style="background: #d97706; color: white; border: none; padding: 0.5rem 0.75rem; border-radius: 6px; font-size: 12px; cursor: pointer; font-weight: bold;">📋 Exportar</button>` : ''}
+                    <button class="modal-cerrar" onclick="this.closest('.modal-overlay').remove()">✕</button>
+                </div>
             </div>
             <div class="modal-body" style="display: flex; flex-direction: column; gap: 1rem; max-height: 70vh; overflow-y: auto;">
                 <div style="border-bottom: 2px solid #e0e0e0; padding-bottom: 1rem;">
@@ -1180,6 +1183,54 @@ function eliminarClienteGuardado(nombre) {
         document.querySelectorAll('.modal-overlay').forEach(m => m.remove());
         abrirSelectorCliente();
     }
+}
+
+function exportarClientesGuardados() {
+    const clientesGuardados = obtenerClientesGuardados();
+
+    if (clientesGuardados.length === 0) {
+        alert('No hay clientes guardados para exportar');
+        return;
+    }
+
+    const clientesCode = clientesGuardados.map(c =>
+        `    { nombre: '${c.nombre}', tipo: '${c.tipo}', telefono: '${c.telefono}' },`
+    ).join('\n');
+
+    const textoExportar = `// Agregar estos clientes a clientes.js:
+${clientesCode}`;
+
+    // Mostrar modal con código para copiar
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.innerHTML = `
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <h2>📋 Exportar Clientes</h2>
+                <button class="modal-cerrar" onclick="this.closest('.modal-overlay').remove()">✕</button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 12px; color: #666; margin-bottom: 1rem;">
+                    Copia este código y pégalo en <strong>clientes.js</strong> dentro de CLIENTES_CONFIG:
+                </p>
+                <textarea readonly style="width: 100%; height: 200px; padding: 0.75rem; border: 2px solid #e0e0e0; border-radius: 8px; font-family: monospace; font-size: 11px; resize: vertical;">
+${textoExportar}</textarea>
+                <button onclick="copiarAlPortapapeles(this.previousElementSibling.value)"
+                        style="width: 100%; margin-top: 1rem; background: linear-gradient(135deg, #7cb342 0%, #558b2f 100%); color: white; border: none; padding: 0.75rem; border-radius: 8px; font-weight: bold; cursor: pointer;">
+                    📋 Copiar Código
+                </button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+function copiarAlPortapapeles(texto) {
+    navigator.clipboard.writeText(texto).then(() => {
+        alert('✓ Código copiado al portapapeles');
+    }).catch(() => {
+        alert('Error al copiar. Copia manualmente.');
+    });
 }
 
 function seleccionarCliente(index, modalElement) {
