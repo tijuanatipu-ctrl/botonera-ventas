@@ -1048,7 +1048,7 @@ function abrirSelectorCliente() {
             <button class="cliente-item ${clienteSeleccionado && clienteSeleccionado.nombre === cliente.nombre ? 'activo' : ''}"
                     onclick="seleccionarCliente(${index}, this.closest('.modal-overlay'))">
                 <div class="cliente-nombre">${cliente.nombre}</div>
-                <div class="cliente-tipo">${cliente.tipo} • ${cliente.telefono}</div>
+                <div class="cliente-tipo">${cliente.tipo}</div>
             </button>
         `).join('');
     } else {
@@ -1061,13 +1061,53 @@ function abrirSelectorCliente() {
                 <h2>👤 Seleccionar Cliente</h2>
                 <button class="modal-cerrar" onclick="this.closest('.modal-overlay').remove()">✕</button>
             </div>
-            <div class="modal-body" style="display: flex; flex-direction: column; gap: 0.5rem;">
-                ${clientesHTML}
+            <div class="modal-body" style="display: flex; flex-direction: column; gap: 1rem;">
+                <div style="border-bottom: 2px solid #e0e0e0; padding-bottom: 1rem;">
+                    <h3 style="margin-bottom: 0.75rem; font-size: 12px; color: #666;">Clientes Frecuentes</h3>
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        ${clientesHTML}
+                    </div>
+                </div>
+
+                <div>
+                    <h3 style="margin-bottom: 0.75rem; font-size: 12px; color: #666;">Agregar Cliente Rápido</h3>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <input type="text" class="cliente-rapido-input" id="cliente-rapido-nombre"
+                               placeholder="Nombre del cliente"
+                               style="flex: 1; padding: 0.75rem; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 13px;">
+                        <button class="btn-agregar-cliente" onclick="agregarClienteRapido(this.closest('.modal-overlay'))"
+                                style="background: linear-gradient(135deg, #7cb342 0%, #558b2f 100%); color: white; border: none; padding: 0.75rem 1rem; border-radius: 8px; font-weight: bold; cursor: pointer;">
+                            ✓ Usar
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     `;
 
     document.body.appendChild(modal);
+    document.getElementById('cliente-rapido-nombre').focus();
+}
+
+function agregarClienteRapido(modalElement) {
+    const nombreInput = document.getElementById('cliente-rapido-nombre');
+    const nombre = nombreInput.value.trim();
+
+    if (!nombre) {
+        alert('Por favor ingresa un nombre de cliente');
+        return;
+    }
+
+    clienteSeleccionado = {
+        nombre: nombre,
+        tipo: 'Cliente Rápido',
+        telefono: ''
+    };
+
+    guardarCliente();
+    actualizarNombreCliente();
+    modalElement.remove();
+    console.log('✓ Cliente rápido seleccionado:', clienteSeleccionado.nombre);
 }
 
 function seleccionarCliente(index, modalElement) {
