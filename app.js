@@ -1042,6 +1042,7 @@ function abrirSelectorCliente() {
     const modal = document.createElement('div');
     modal.className = 'modal-overlay';
 
+    // Clientes predefinidos
     let clientesHTML = '';
     if (typeof CLIENTES_CONFIG !== 'undefined' && CLIENTES_CONFIG.length > 0) {
         clientesHTML = CLIENTES_CONFIG.map((cliente, index) => `
@@ -1051,8 +1052,25 @@ function abrirSelectorCliente() {
                 <div class="cliente-tipo">${cliente.tipo}</div>
             </button>
         `).join('');
-    } else {
-        clientesHTML = '<p style="text-align: center; color: #6b7280;">No hay clientes disponibles</p>';
+    }
+
+    // Clientes guardados (localStorage)
+    const clientesGuardados = obtenerClientesGuardados();
+    let clientesGuardadosHTML = '';
+    if (clientesGuardados.length > 0) {
+        clientesGuardadosHTML = clientesGuardados.map((cliente, index) => `
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem; background: #f9faf8; border-radius: 8px; margin-bottom: 0.5rem;">
+                <button class="cliente-item" style="flex: 1; text-align: left; background: transparent; border: none; padding: 0;"
+                        onclick="seleccionarClienteGuardado('${cliente.nombre}', this.closest('.modal-overlay'))">
+                    <div class="cliente-nombre" style="margin: 0;">${cliente.nombre}</div>
+                    <div class="cliente-tipo" style="font-size: 10px; color: #999;">Mi Cliente</div>
+                </button>
+                <button onclick="eliminarClienteGuardado('${cliente.nombre}')"
+                        style="background: #ff6b6b; color: white; border: none; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 11px; cursor: pointer;">
+                    ✕
+                </button>
+            </div>
+        `).join('');
     }
 
     modal.innerHTML = `
@@ -1061,13 +1079,22 @@ function abrirSelectorCliente() {
                 <h2>👤 Seleccionar Cliente</h2>
                 <button class="modal-cerrar" onclick="this.closest('.modal-overlay').remove()">✕</button>
             </div>
-            <div class="modal-body" style="display: flex; flex-direction: column; gap: 1rem;">
+            <div class="modal-body" style="display: flex; flex-direction: column; gap: 1rem; max-height: 70vh; overflow-y: auto;">
                 <div style="border-bottom: 2px solid #e0e0e0; padding-bottom: 1rem;">
                     <h3 style="margin-bottom: 0.75rem; font-size: 12px; color: #666;">Clientes Frecuentes</h3>
                     <div style="display: flex; flex-direction: column; gap: 0.5rem;">
                         ${clientesHTML}
                     </div>
                 </div>
+
+                ${clientesGuardadosHTML ? `
+                <div style="border-bottom: 2px solid #e0e0e0; padding-bottom: 1rem;">
+                    <h3 style="margin-bottom: 0.75rem; font-size: 12px; color: #666;">Mis Clientes</h3>
+                    <div>
+                        ${clientesGuardadosHTML}
+                    </div>
+                </div>
+                ` : ''}
 
                 <div>
                     <h3 style="margin-bottom: 0.75rem; font-size: 12px; color: #666;">Agregar Cliente Rápido</h3>
@@ -1105,9 +1132,54 @@ function agregarClienteRapido(modalElement) {
     };
 
     guardarCliente();
+    guardarClienteEnHistorial(nombre);
     actualizarNombreCliente();
     modalElement.remove();
     console.log('✓ Cliente rápido seleccionado:', clienteSeleccionado.nombre);
+}
+
+function seleccionarClienteGuardado(nombre, modalElement) {
+    const clientesGuardados = obtenerClientesGuardados();
+    const cliente = clientesGuardados.find(c => c.nombre === nombre);
+
+    if (cliente) {
+        clienteSeleccionado = cliente;
+        guardarCliente();
+        actualizarNombreCliente();
+        modalElement.remove();
+        console.log('✓ Cliente guardado seleccionado:', cliente.nombre);
+    }
+}
+
+function guardarClienteEnHistorial(nombre) {
+    const clientesGuardados = obtenerClientesGuardados();
+    const existe = clientesGuardados.find(c => c.nombre === nombre);
+
+    if (!existe) {
+        clientesGuardados.push({
+            nombre: nombre,
+            tipo: 'Mi Cliente',
+            telefono: ''
+        });
+        localStorage.setItem('clientesGuardados', JSON.stringify(clientesGuardados));
+    }
+}
+
+function obtenerClientesGuardados() {
+    const guardados = localStorage.getItem('clientesGuardados');
+    return guardados ? JSON.parse(guardados) : [];
+}
+
+function eliminarClienteGuardado(nombre) {
+    if (confirm(`¿Eliminar cliente "${nombre}"?`)) {
+        let clientesGuardados = obtenerClientesGuardados();
+        clientesGuardados = clientesGuardados.filter(c => c.nombre !== nombre);
+        localStorage.setItem('clientesGuardados', JSON.stringify(clientesGuardados));
+
+        // Actualizar modal
+        document.querySelectorAll('.modal-overlay').forEach(m => m.remove());
+        abrirSelectorCliente();
+    }
 }
 
 function seleccionarCliente(index, modalElement) {
