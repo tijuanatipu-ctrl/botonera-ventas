@@ -41,25 +41,32 @@ async function cargarProductos() {
                 const precio = parseFloat(precioStr.replace(/[^\d,.-]/g, '').replace(/\./g, '').replace(',', '.')) || 0;
                 if (precio <= 0) return null;
 
+                const nombreUpper = nombre.toUpperCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
                 let emoji = '🥬';
-                if (nombre.toUpperCase().includes('MANDARINA')) emoji = '🍊';
-                else if (nombre.toUpperCase().includes('CALABAZA')) emoji = '🎃';
-                else if (nombre.toUpperCase().includes('TOMATE')) emoji = '🍅';
-                else if (nombre.toUpperCase().includes('AJO')) emoji = '🧄';
-                else if (nombre.toUpperCase().includes('BERENJENA')) emoji = '🍆';
-                else if (nombre.toUpperCase().includes('BRÓCOLI')) emoji = '🥦';
-                else if (nombre.toUpperCase().includes('ZANAHORIA')) emoji = '🥕';
-                else if (nombre.toUpperCase().includes('CEBOLLA')) emoji = '🧅';
-                else if (nombre.toUpperCase().includes('CHOCLO')) emoji = '🌽';
-                else if (nombre.toUpperCase().includes('HUEVO')) emoji = '🥚';
-                else if (nombre.toUpperCase().includes('RUCULA')) emoji = '🥗';
-                else if (nombre.toUpperCase().includes('HOJAS')) emoji = '🥗';
-                else if (nombre.toUpperCase().includes('ACHICORIA')) emoji = '🥗';
-                else if (nombre.toUpperCase().includes('AROMATICA') || nombre.toUpperCase().includes('OREGANO') || nombre.toUpperCase().includes('MENTA')) emoji = '🌿';
-                else if (nombre.toUpperCase().includes('PUERRO')) emoji = '🌿';
-                else if (nombre.toUpperCase().includes('ALBAHACA')) emoji = '🌿';
-                else if (nombre.toUpperCase().includes('HINOJO')) emoji = '🌿';
-                else if (nombre.toUpperCase().includes('PLANTIN')) emoji = '🪴';
+
+                if (nombreUpper.includes('MANDARINA')) emoji = '🍊';
+                else if (nombreUpper.includes('CALABAZA')) emoji = '🎃';
+                else if (nombreUpper.includes('TOMATE')) emoji = '🍅';
+                else if (nombreUpper.includes('AJO')) emoji = '🧄';
+                else if (nombreUpper.includes('BERENJENA')) emoji = '🍆';
+                else if (nombreUpper.includes('BROCOLI')) emoji = '🥦';
+                else if (nombreUpper.includes('ZANAHORIA')) emoji = '🥕';
+                else if (nombreUpper.includes('CIBULLETE')) emoji = '🧅';
+                else if (nombreUpper.includes('CEBOLLA')) emoji = '🧅';
+                else if (nombreUpper.includes('CHOCLO')) emoji = '🌽';
+                else if (nombreUpper.includes('HUEVO')) emoji = '🥚';
+                else if (nombreUpper.includes('RUCULA')) emoji = '🥗';
+                else if (nombreUpper.includes('HOJAS')) emoji = '🥗';
+                else if (nombreUpper.includes('ACHICORIA')) emoji = '🥗';
+                else if (nombreUpper.includes('KALE')) emoji = '🥬';
+                else if (nombreUpper.includes('ACELGA')) emoji = '🥬';
+                else if (nombreUpper.includes('AROMATICA')) emoji = '🌿';
+                else if (nombreUpper.includes('OREGANO')) emoji = '🌿';
+                else if (nombreUpper.includes('MENTA')) emoji = '🌿';
+                else if (nombreUpper.includes('PUERRO')) emoji = '🌿';
+                else if (nombreUpper.includes('ALBAHACA')) emoji = '🌿';
+                else if (nombreUpper.includes('HINOJO')) emoji = '🌿';
+                else if (nombreUpper.includes('PLANTIN')) emoji = '🪴';
 
                 return {
                     nombre: nombre,
