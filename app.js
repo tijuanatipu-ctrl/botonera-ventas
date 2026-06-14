@@ -5,8 +5,8 @@ let clienteSeleccionado = null;
 let metodoPago = 'efectivo';
 
 // INICIAR APP
-document.addEventListener('DOMContentLoaded', () => {
-    cargarProductos();
+document.addEventListener('DOMContentLoaded', async () => {
+    await cargarProductos();
     restaurarCarrito();
     restaurarCliente();
     restaurarTema();
@@ -14,14 +14,77 @@ document.addEventListener('DOMContentLoaded', () => {
     actualizarNombreCliente();
 });
 
-// CARGAR PRODUCTOS DESDE config.js
-function cargarProductos() {
-    if (typeof PRODUCTOS_CONFIG !== 'undefined' && PRODUCTOS_CONFIG.length > 0) {
-        productos = PRODUCTOS_CONFIG;
-        console.log(`✓ Cargados ${productos.length} productos`);
-    } else {
-        console.log('⚠️ No hay productos configurados');
-        productos = [];
+// CARGAR PRODUCTOS DESDE GOOGLE SHEET
+async function cargarProductos() {
+    try {
+        const SHEET_ID = '1RSNg9tdl98Zzw_4DnqGqYz9lcpDbs7hGXZcdgItre-w';
+        const GID = '196036548';
+        const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${GID}`;
+
+        const response = await fetch(url);
+        const csv = await response.text();
+
+        if (!csv || csv.length === 0) throw new Error('Sheet vacío');
+
+        const lineas = csv.split('\n').slice(2);
+        const productosSheet = lineas
+            .map(linea => {
+                const partes = linea.split(',');
+                if (partes.length < 5) return null;
+
+                const nombre = (partes[1] || '').trim().replace(/"/g, '');
+                const peso = (partes[2] || '').trim().replace(/"/g, '');
+                const precioStr = (partes[5] || partes[4] || '0').toString().trim().replace(/"/g, '');
+
+                if (!nombre || nombre.length === 0) return null;
+
+                const precio = parseFloat(precioStr.replace(/[^\d,.-]/g, '').replace(/\./g, '').replace(',', '.')) || 0;
+                if (precio <= 0) return null;
+
+                let emoji = '🥬';
+                if (nombre.toUpperCase().includes('MANDARINA')) emoji = '🍊';
+                else if (nombre.toUpperCase().includes('CALABAZA')) emoji = '🎃';
+                else if (nombre.toUpperCase().includes('TOMATE')) emoji = '🍅';
+                else if (nombre.toUpperCase().includes('AJO')) emoji = '🧄';
+                else if (nombre.toUpperCase().includes('BERENJENA')) emoji = '🍆';
+                else if (nombre.toUpperCase().includes('BRÓCOLI')) emoji = '🥦';
+                else if (nombre.toUpperCase().includes('ZANAHORIA')) emoji = '🥕';
+                else if (nombre.toUpperCase().includes('CEBOLLA')) emoji = '🧅';
+                else if (nombre.toUpperCase().includes('CHOCLO')) emoji = '🌽';
+                else if (nombre.toUpperCase().includes('HUEVO')) emoji = '🥚';
+                else if (nombre.toUpperCase().includes('RUCULA')) emoji = '🥗';
+                else if (nombre.toUpperCase().includes('HOJAS')) emoji = '🥗';
+                else if (nombre.toUpperCase().includes('ACHICORIA')) emoji = '🥗';
+                else if (nombre.toUpperCase().includes('AROMATICA') || nombre.toUpperCase().includes('OREGANO') || nombre.toUpperCase().includes('MENTA')) emoji = '🌿';
+                else if (nombre.toUpperCase().includes('PUERRO')) emoji = '🌿';
+                else if (nombre.toUpperCase().includes('ALBAHACA')) emoji = '🌿';
+                else if (nombre.toUpperCase().includes('HINOJO')) emoji = '🌿';
+                else if (nombre.toUpperCase().includes('PLANTIN')) emoji = '🪴';
+
+                return {
+                    nombre: nombre,
+                    precio: Math.round(precio),
+                    unidad: peso.toLowerCase().includes('kg') || peso.toLowerCase().includes('kilo') ? 'kilo' : 'unidad',
+                    peso: peso,
+                    emoji: emoji
+                };
+            })
+            .filter(p => p !== null && !p.nombre.includes('#REF') && !p.nombre.includes('#VALOR'));
+
+        if (productosSheet.length > 0) {
+            productos = productosSheet;
+            console.log(`✓ Cargados ${productos.length} productos desde Google Sheet`);
+        } else {
+            throw new Error('No hay productos válidos en el Sheet');
+        }
+    } catch (error) {
+        console.log('⚠️ Cargando desde config.js:', error.message);
+        if (typeof PRODUCTOS_CONFIG !== 'undefined' && PRODUCTOS_CONFIG.length > 0) {
+            productos = PRODUCTOS_CONFIG;
+            console.log(`✓ Cargados ${productos.length} productos desde config.js`);
+        } else {
+            productos = [];
+        }
     }
 }
 
