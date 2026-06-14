@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
+    <title>Botonera Ventas - El Huerto</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <!-- PANTALLA PRINCIPAL: PRODUCTOS -->
+        <div id="pantalla-productos" class="pantalla activa">
+            <header class="header">
+                <div style="display: flex; align-items: center; gap: 1rem; flex: 1;">
+                    <h1 style="margin: 0; font-size: 1.1rem; letter-spacing: 0.5px;">el Huerto de Lucas</h1>
+                    <button class="btn-cliente" onclick="abrirSelectorCliente()" title="Cambiar cliente">
+                        👤 <span id="cliente-nombre">Seleccionar</span>
+                    </button>
+                </div>
+                <div class="header-info">
+                    <button class="btn-tema" onclick="cambiarTema()" title="Cambiar tema">
+                        <span id="icono-tema">🌙</span>
+                    </button>
+                    <button class="btn-resetear" onclick="limpiarCarrito(); renderizarProductos();" title="Limpiar carrito">🔄</button>
+                    <span id="total-items" class="badge">0</span>
+                </div>
+            </header>
+
+            <main class="contenedor">
+                <div id="productos-grid" class="productos-grid">
+                    <!-- Los productos se cargan aquí desde el Sheet -->
+                </div>
+
+                <button id="btn-total" class="btn-total" onclick="irAResumen()">
+                    💰 TOTAL
+                </button>
+            </main>
+        </div>
+
+        <!-- PANTALLA RESUMEN -->
+        <div id="pantalla-resumen" class="pantalla">
+            <header class="header">
+                <button class="btn-volver" onclick="volverAProductos()">← Volver</button>
+                <h1>Resumen Pedido</h1>
+                <div style="width: 40px;"></div>
+            </header>
+
+            <main class="contenedor">
+                <div id="resumen-cliente" class="resumen-cliente"></div>
+
+                <div class="resumen-metodo-pago">
+                    <label for="metodo-pago">💳 Método de Pago:</label>
+                    <select id="metodo-pago" class="select-metodo-pago" onchange="actualizarMetodoPago(this.value)">
+                        <option value="efectivo">Efectivo</option>
+                        <option value="cuenta-dni">Cuenta DNI</option>
+                        <option value="transferencia">Transferencia</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+
+                <div id="resumen-items" class="resumen-items">
+                    <!-- Los items del carrito se listan aquí -->
+                </div>
+
+                <div class="resumen-totales">
+                    <div class="total-linea">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">$0</span>
+                    </div>
+                    <div class="total-linea final">
+                        <span>TOTAL:</span>
+                        <span id="total-final">$0</span>
+                    </div>
+                </div>
+
+                <button id="btn-confirmar" class="btn-confirmar" onclick="confirmarPedido()">
+                    ✓ Confirmar Pedido
+                </button>
+
+                <button class="btn-whatsapp" onclick="enviarPorWhatsapp()">
+                    💬 Enviar por WhatsApp
+                </button>
+
+                <button class="btn-limpiar" onclick="limpiarCarrito()">
+                    🗑️ Limpiar Carrito
+                </button>
+            </main>
+        </div>
+
+        <!-- PANTALLA HISTORIAL -->
+        <div id="pantalla-historial" class="pantalla">
+            <header class="header">
+                <button class="btn-volver" onclick="volverAProductos()">← Volver</button>
+                <h1>Historial</h1>
+                <div style="width: 40px;"></div>
+            </header>
+
+            <main class="contenedor">
+                <div id="historial-list" class="historial-list">
+                    <!-- Los pedidos guardados se listan aquí -->
+                </div>
+            </main>
+        </div>
+
+        <!-- FOOTER CON BOTONES -->
+        <footer class="footer">
+            <button class="btn-footer activo" onclick="mostrarPantalla('pantalla-productos')">
+                🛒 Productos
+            </button>
+            <button class="btn-footer" onclick="mostrarPantalla('pantalla-historial')">
+                📜 Historial
+            </button>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="config.js"></script>
+    <script src="clientes.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
