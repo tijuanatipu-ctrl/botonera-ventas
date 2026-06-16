@@ -1082,8 +1082,14 @@ async function exportarListaPrecios() {
         a.nombre.localeCompare(b.nombre, 'es')
     );
 
-    const productosHTML = productosOrdenados.map(p => `
-${p.nombre.padEnd(45)} $${p.precio.toString().padStart(8)}`).join('\n');
+    const productosHTML = productosOrdenados.map(p => {
+        // Cortar nombre si es muy largo (máx 40 caracteres)
+        let nombre = p.nombre;
+        if (nombre.length > 40) {
+            nombre = nombre.substring(0, 37) + '...';
+        }
+        return `${nombre.padEnd(40)} $ ${p.precio.toString().padStart(7)}`;
+    }).join('\n');
 
     // Crear elemento HTML invisible con el ticket
     const ticket = document.createElement('div');
