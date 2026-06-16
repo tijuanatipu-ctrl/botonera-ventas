@@ -1055,6 +1055,7 @@ function renderizarListaPrecios() {
 
         const item = document.createElement('div');
         item.className = 'precio-item';
+        item.onclick = () => mostrarPantalla('pantalla-productos');
         item.innerHTML = `
             <div class="precio-emoji">${emoji}</div>
             <div>
