@@ -1077,8 +1077,12 @@ function mostrarListaPrecios() {
 async function exportarListaPrecios() {
     const fecha = new Date().toLocaleDateString('es-AR') + ', ' + new Date().toLocaleTimeString('es-AR');
 
-    // Generar tabla de productos
-    const productosHTML = productos.map(p => `
+    // Generar tabla de productos ordenados
+    const productosOrdenados = [...productos].sort((a, b) =>
+        a.nombre.localeCompare(b.nombre, 'es')
+    );
+
+    const productosHTML = productosOrdenados.map(p => `
 ${p.nombre.padEnd(45)} $${p.precio.toString().padStart(8)}`).join('\n');
 
     // Crear elemento HTML invisible con el ticket
@@ -1123,14 +1127,18 @@ Gracias por tu compra! 🌻
         const canvas = await html2canvas(ticket, {
             backgroundColor: '#ffffff',
             scale: 2,
-            logging: false
+            logging: false,
+            useCORS: true
         });
 
         canvas.toBlob((blob) => {
             const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = `lista-precios-${new Date().toISOString().split('T')[0]}.jpg`;
+            const filename = `lista-precios-${new Date().toISOString().split('T')[0]}.jpg`;
+
+            // Crear link de descarga real
+            const downloadLink = document.createElement('a');
+            downloadLink.href = url;
+            downloadLink.download = filename;
 
             // Mostrar modal con opciones
             const modal = document.createElement('div');
@@ -1143,33 +1151,36 @@ Gracias por tu compra! 🌻
                     </div>
                     <div class="modal-body" style="text-align: center;">
                         <p style="margin-bottom: 1.5rem; color: #666;">✓ Lista lista para compartir</p>
-                        <button onclick="this.closest('.modal-overlay').previousElementSibling.click(); this.closest('.modal-overlay').remove()"
-                                style="width: 100%; background: linear-gradient(135deg, #7cb342 0%, #558b2f 100%); color: white; border: none; padding: 0.75rem; border-radius: 8px; font-weight: bold; cursor: pointer; margin-bottom: 0.5rem;">
+                        <button id="btn-descargar" style="width: 100%; background: linear-gradient(135deg, #7cb342 0%, #558b2f 100%); color: white; border: none; padding: 0.75rem; border-radius: 8px; font-weight: bold; cursor: pointer; margin-bottom: 0.5rem;">
                             📥 Descargar JPG
                         </button>
-                        <button onclick="compartirListaPrecios('${url}')"
+                        <button onclick="compartirListaPrecios()"
                                 style="width: 100%; background: linear-gradient(135deg, #d97706 0%, #b8860b 100%); color: white; border: none; padding: 0.75rem; border-radius: 8px; font-weight: bold; cursor: pointer;">
-                            💬 Enviar por WhatsApp
+                            💬 Abrir WhatsApp
                         </button>
                     </div>
                 </div>
             `;
             document.body.appendChild(modal);
 
-            // Link oculto para descargar
-            document.body.appendChild(link);
+            // Evento de descarga
+            document.getElementById('btn-descargar').onclick = () => {
+                downloadLink.click();
+            };
         });
     } catch (error) {
         console.error('Error al exportar:', error);
         alert('Error al generar la lista de precios');
     } finally {
-        document.body.removeChild(ticket);
+        if (document.body.contains(ticket)) {
+            document.body.removeChild(ticket);
+        }
     }
 }
 
-function compartirListaPrecios(imageUrl) {
+function compartirListaPrecios() {
     const numeroWhatsapp = '5491125328861';
-    const mensaje = encodeURIComponent('📋 Lista de Precios - El Huerto de Lucas\n\nPrecios vigentes');
+    const mensaje = encodeURIComponent('📋 Lista de Precios - El Huerto de Lucas\n\nPrecios vigentes\n\n⚠️ Nota: adjunta la imagen de la lista que descargaste');
 
     window.open(`https://wa.me/${numeroWhatsapp}?text=${mensaje}`, '_blank');
 }
