@@ -1104,6 +1104,10 @@ async function exportarListaPrecios() {
 Fecha: ${fecha}
 </div>
 
+<div style="font-weight: bold; font-size: 13px; margin: 8px 0 5px 0; text-align: center;">
+LISTA DE PRECIOS VIGENTE
+</div>
+
 <div style="text-align: left; border-bottom: 1px dashed #000; padding-bottom: 5px; margin-bottom: 5px;">
 PRODUCTO                                    PRECIO
 </div>
