@@ -1072,6 +1072,26 @@ function renderizarListaPrecios() {
 function mostrarListaPrecios() {
     mostrarPantalla('pantalla-precios');
     renderizarListaPrecios();
+    actualizarNavActivo('pantalla-precios');
+}
+
+// ACTUALIZAR BOTÓN DE NAVEGACIÓN ACTIVO
+function actualizarNavActivo(pantalla) {
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('activo');
+    });
+
+    // Mapear pantalla a índice de botón
+    const btnMap = {
+        'pantalla-productos': 0,
+        'pantalla-precios': 1,
+        'pantalla-historial': 2
+    };
+
+    const index = btnMap[pantalla];
+    if (index !== undefined) {
+        document.querySelectorAll('.nav-btn')[index].classList.add('activo');
+    }
 }
 
 // EXPORTAR LISTA DE PRECIOS COMO JPG

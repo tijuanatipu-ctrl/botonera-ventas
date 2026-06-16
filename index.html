@@ -12,6 +12,19 @@
 </head>
 <body>
     <div id="app">
+        <!-- NAVEGACIÓN GLOBAL -->
+        <nav class="nav-global">
+            <button class="nav-btn activo" onclick="mostrarPantalla('pantalla-productos'); actualizarNavActivo('pantalla-productos')">
+                🛒 Productos
+            </button>
+            <button class="nav-btn" onclick="mostrarListaPrecios(); actualizarNavActivo('pantalla-precios')">
+                💰 Precios
+            </button>
+            <button class="nav-btn" onclick="mostrarPantalla('pantalla-historial'); actualizarNavActivo('pantalla-historial')">
+                📜 Historial
+            </button>
+        </nav>
+
         <!-- PANTALLA PRINCIPAL: PRODUCTOS -->
         <div id="pantalla-productos" class="pantalla activa">
             <header class="header">
@@ -123,18 +136,6 @@
             </main>
         </div>
 
-        <!-- FOOTER CON BOTONES -->
-        <footer class="footer">
-            <button class="btn-footer activo" onclick="mostrarPantalla('pantalla-productos')">
-                🛒 Productos
-            </button>
-            <button class="btn-footer" onclick="mostrarListaPrecios()">
-                💰 Precios
-            </button>
-            <button class="btn-footer" onclick="mostrarPantalla('pantalla-historial')">
-                📜 Historial
-            </button>
-        </footer>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
