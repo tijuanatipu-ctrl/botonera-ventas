@@ -1186,7 +1186,34 @@ Gracias por tu compra! 🌻
 
 function compartirListaPrecios() {
     const numeroWhatsapp = '5491125328861';
-    const mensaje = encodeURIComponent('📋 Lista de Precios - El Huerto de Lucas\n\nPrecios vigentes\n\n⚠️ Nota: adjunta la imagen de la lista que descargaste');
+
+    // Generar tabla de productos ordenados
+    const productosOrdenados = [...productos].sort((a, b) =>
+        a.nombre.localeCompare(b.nombre, 'es')
+    );
+
+    // Formatear productos para WhatsApp
+    let textoProductos = 'PRODUCTO                              PRECIO\n';
+    textoProductos += '═══════════════════════════════════════════════════\n';
+
+    productosOrdenados.forEach(p => {
+        let nombre = p.nombre;
+        if (nombre.length > 36) {
+            nombre = nombre.substring(0, 33) + '...';
+        }
+        textoProductos += nombre.padEnd(36) + ' $ ' + p.precio.toString().padStart(7) + '\n';
+    });
+
+    const mensaje = encodeURIComponent(
+        '📋 LISTA DE PRECIOS\n' +
+        'El Huerto de Lucas\n' +
+        'Los Sauces 264 - General Pinto\n\n' +
+        textoProductos + '\n' +
+        '═══════════════════════════════════════════════════\n' +
+        `Total de productos: ${productos.length}\n\n` +
+        '📱 +54 9 1125328861\n' +
+        '📸 @elhuertodelucas'
+    );
 
     window.open(`https://wa.me/${numeroWhatsapp}?text=${mensaje}`, '_blank');
 }
