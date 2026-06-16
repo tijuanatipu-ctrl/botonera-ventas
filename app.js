@@ -1044,7 +1044,12 @@ function renderizarListaPrecios() {
 
     grid.innerHTML = '';
 
-    productos.forEach(producto => {
+    // Ordenar productos alfabéticamente
+    const productosOrdenados = [...productos].sort((a, b) =>
+        a.nombre.localeCompare(b.nombre, 'es')
+    );
+
+    productosOrdenados.forEach(producto => {
         const emoji = producto.emoji || '🥬';
         const precio = producto.precio.toLocaleString();
 
@@ -1052,8 +1057,10 @@ function renderizarListaPrecios() {
         item.className = 'precio-item';
         item.innerHTML = `
             <div class="precio-emoji">${emoji}</div>
-            <div class="precio-nombre">${producto.nombre}</div>
-            <div class="precio-peso">${producto.peso}</div>
+            <div>
+                <div class="precio-nombre">${producto.nombre}</div>
+                <div class="precio-peso">${producto.peso}</div>
+            </div>
             <div class="precio-valor">$${precio}</div>
         `;
         grid.appendChild(item);
