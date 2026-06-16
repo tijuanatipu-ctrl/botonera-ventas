@@ -1066,6 +1066,107 @@ function mostrarListaPrecios() {
     renderizarListaPrecios();
 }
 
+// EXPORTAR LISTA DE PRECIOS COMO JPG
+async function exportarListaPrecios() {
+    const fecha = new Date().toLocaleDateString('es-AR') + ', ' + new Date().toLocaleTimeString('es-AR');
+
+    // Generar tabla de productos
+    const productosHTML = productos.map(p => `
+${p.nombre.padEnd(45)} $${p.precio.toString().padStart(8)}`).join('\n');
+
+    // Crear elemento HTML invisible con el ticket
+    const ticket = document.createElement('div');
+    ticket.style.cssText = 'position: fixed; top: 0; left: 0; width: 580px; padding: 30px; background: #ffffff; font-family: monospace; color: #000; z-index: 10000; font-size: 13px; line-height: 1.6;';
+
+    ticket.innerHTML = `
+<div style="text-align: center; white-space: pre-wrap; word-wrap: break-word;">
+<div style="font-weight: bold; font-size: 16px; margin-bottom: 5px;">EL HUERTO DE LUCAS</div>
+<div style="font-size: 12px; margin-bottom: 15px;">Los Sauces 264 - General Pinto</div>
+
+<div style="border-bottom: 1px dashed #000; padding-bottom: 10px; margin-bottom: 10px;">
+Fecha: ${fecha}
+</div>
+
+<div style="text-align: left; border-bottom: 1px dashed #000; padding-bottom: 10px; margin-bottom: 10px;">
+PRODUCTO                                    PRECIO
+</div>
+
+<div style="text-align: left; border-bottom: 1px dashed #000; padding-bottom: 10px; margin-bottom: 10px; white-space: pre;">
+${productosHTML}
+</div>
+
+<div style="border-top: 2px solid #000; border-bottom: 2px solid #000; padding: 10px 0; margin: 10px 0; text-align: right; font-weight: bold; font-size: 14px;">
+TOTAL PRODUCTOS: ${productos.length}
+</div>
+
+<div style="text-align: center; margin: 15px 0;">
+Gracias por tu compra! 🌻
+</div>
+
+<div style="border-top: 1px dashed #000; padding-top: 10px; text-align: center; font-size: 11px;">
+📱 +54 9 1125328861
+📸 @elhuertodelucas
+</div>
+</div>
+    `;
+
+    document.body.appendChild(ticket);
+
+    try {
+        const canvas = await html2canvas(ticket, {
+            backgroundColor: '#ffffff',
+            scale: 2,
+            logging: false
+        });
+
+        canvas.toBlob((blob) => {
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `lista-precios-${new Date().toISOString().split('T')[0]}.jpg`;
+
+            // Mostrar modal con opciones
+            const modal = document.createElement('div');
+            modal.className = 'modal-overlay';
+            modal.innerHTML = `
+                <div class="modal-content" style="max-width: 500px;">
+                    <div class="modal-header">
+                        <h2>📋 Lista de Precios Exportada</h2>
+                        <button class="modal-cerrar" onclick="this.closest('.modal-overlay').remove()">✕</button>
+                    </div>
+                    <div class="modal-body" style="text-align: center;">
+                        <p style="margin-bottom: 1.5rem; color: #666;">✓ Lista lista para compartir</p>
+                        <button onclick="this.closest('.modal-overlay').previousElementSibling.click(); this.closest('.modal-overlay').remove()"
+                                style="width: 100%; background: linear-gradient(135deg, #7cb342 0%, #558b2f 100%); color: white; border: none; padding: 0.75rem; border-radius: 8px; font-weight: bold; cursor: pointer; margin-bottom: 0.5rem;">
+                            📥 Descargar JPG
+                        </button>
+                        <button onclick="compartirListaPrecios('${url}')"
+                                style="width: 100%; background: linear-gradient(135deg, #d97706 0%, #b8860b 100%); color: white; border: none; padding: 0.75rem; border-radius: 8px; font-weight: bold; cursor: pointer;">
+                            💬 Enviar por WhatsApp
+                        </button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+
+            // Link oculto para descargar
+            document.body.appendChild(link);
+        });
+    } catch (error) {
+        console.error('Error al exportar:', error);
+        alert('Error al generar la lista de precios');
+    } finally {
+        document.body.removeChild(ticket);
+    }
+}
+
+function compartirListaPrecios(imageUrl) {
+    const numeroWhatsapp = '5491125328861';
+    const mensaje = encodeURIComponent('📋 Lista de Precios - El Huerto de Lucas\n\nPrecios vigentes');
+
+    window.open(`https://wa.me/${numeroWhatsapp}?text=${mensaje}`, '_blank');
+}
+
 // GESTIÓN DE CLIENTES
 function abrirSelectorCliente() {
     const modal = document.createElement('div');

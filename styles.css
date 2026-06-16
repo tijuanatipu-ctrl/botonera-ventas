@@ -86,6 +86,23 @@ body {
     font-style: italic;
 }
 
+.btn-exportar-precios {
+    background: linear-gradient(135deg, #d97706 0%, #b8860b 100%);
+    border: none;
+    color: var(--blanco);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.btn-exportar-precios:active {
+    transform: scale(0.95);
+    box-shadow: var(--sombra);
+}
+
 .header-info {
     display: flex;
     gap: 0.75rem;
