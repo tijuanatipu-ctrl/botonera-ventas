@@ -106,10 +106,28 @@
             </main>
         </div>
 
+        <!-- PANTALLA LISTA DE PRECIOS -->
+        <div id="pantalla-precios" class="pantalla">
+            <header class="header">
+                <button class="btn-volver" onclick="volverAProductos()">← Volver</button>
+                <h1>Lista de Precios</h1>
+                <div style="width: 40px;"></div>
+            </header>
+
+            <main class="contenedor">
+                <div id="precios-grid" class="precios-grid">
+                    <!-- Los productos se listan aquí -->
+                </div>
+            </main>
+        </div>
+
         <!-- FOOTER CON BOTONES -->
         <footer class="footer">
             <button class="btn-footer activo" onclick="mostrarPantalla('pantalla-productos')">
                 🛒 Productos
+            </button>
+            <button class="btn-footer" onclick="mostrarPantalla('pantalla-precios')">
+                💰 Precios
             </button>
             <button class="btn-footer" onclick="mostrarPantalla('pantalla-historial')">
                 📜 Historial

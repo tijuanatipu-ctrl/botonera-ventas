@@ -1037,6 +1037,35 @@ function volverAProductos() {
     mostrarPantalla('pantalla-productos');
 }
 
+// RENDERIZAR LISTA DE PRECIOS
+function renderizarListaPrecios() {
+    const grid = document.getElementById('precios-grid');
+    if (!grid) return;
+
+    grid.innerHTML = '';
+
+    productos.forEach(producto => {
+        const emoji = producto.emoji || '🥬';
+        const precio = producto.precio.toLocaleString();
+
+        const item = document.createElement('div');
+        item.className = 'precio-item';
+        item.innerHTML = `
+            <div class="precio-emoji">${emoji}</div>
+            <div class="precio-nombre">${producto.nombre}</div>
+            <div class="precio-peso">${producto.peso}</div>
+            <div class="precio-valor">$${precio}</div>
+        `;
+        grid.appendChild(item);
+    });
+}
+
+// MOSTRAR LISTA DE PRECIOS
+function mostrarListaPrecios() {
+    mostrarPantalla('pantalla-precios');
+    renderizarListaPrecios();
+}
+
 // GESTIÓN DE CLIENTES
 function abrirSelectorCliente() {
     const modal = document.createElement('div');

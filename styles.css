@@ -746,11 +746,74 @@ body {
     }
 }
 
+/* LISTA DE PRECIOS */
+.precios-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    flex: 1;
+}
+
+.precio-item {
+    background: var(--blanco);
+    border: 2px solid var(--gris-medio);
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: var(--sombra);
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 180px;
+}
+
+.precio-item:hover {
+    box-shadow: var(--sombra-md);
+    border-color: var(--verde);
+    transform: translateY(-2px);
+}
+
+.precio-emoji {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.precio-nombre {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 1.2;
+    color: var(--texto-primario);
+    margin-bottom: 0.5rem;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.precio-peso {
+    font-size: 11px;
+    color: var(--texto-secundario);
+    margin-bottom: 0.5rem;
+}
+
+.precio-valor {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--naranja);
+    padding-top: 0.5rem;
+    border-top: 2px dashed var(--gris-medio);
+}
+
 @media (min-width: 1024px) {
     #app {
         max-width: 512px;
         margin: 0 auto;
         border-left: 1px solid var(--gris-medio);
         border-right: 1px solid var(--gris-medio);
+    }
+
+    .precios-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
