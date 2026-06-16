@@ -1093,34 +1093,34 @@ async function exportarListaPrecios() {
 
     // Crear elemento HTML invisible con el ticket
     const ticket = document.createElement('div');
-    ticket.style.cssText = 'position: fixed; top: 0; left: 0; width: 580px; padding: 30px; background: #ffffff; font-family: monospace; color: #000; z-index: 10000; font-size: 13px; line-height: 1.6;';
+    ticket.style.cssText = 'position: fixed; top: 0; left: 0; width: 580px; padding: 20px 30px; background: #ffffff; font-family: monospace; color: #000; z-index: 10000; font-size: 12px; line-height: 1.2;';
 
     ticket.innerHTML = `
 <div style="text-align: center; white-space: pre-wrap; word-wrap: break-word;">
-<div style="font-weight: bold; font-size: 16px; margin-bottom: 5px;">EL HUERTO DE LUCAS</div>
-<div style="font-size: 12px; margin-bottom: 15px;">Los Sauces 264 - General Pinto</div>
+<div style="font-weight: bold; font-size: 15px; margin-bottom: 2px;">EL HUERTO DE LUCAS</div>
+<div style="font-size: 11px; margin-bottom: 8px;">Los Sauces 264 - General Pinto</div>
 
-<div style="border-bottom: 1px dashed #000; padding-bottom: 10px; margin-bottom: 10px;">
+<div style="border-bottom: 1px dashed #000; padding-bottom: 5px; margin-bottom: 5px;">
 Fecha: ${fecha}
 </div>
 
-<div style="text-align: left; border-bottom: 1px dashed #000; padding-bottom: 10px; margin-bottom: 10px;">
+<div style="text-align: left; border-bottom: 1px dashed #000; padding-bottom: 5px; margin-bottom: 5px;">
 PRODUCTO                                    PRECIO
 </div>
 
-<div style="text-align: left; border-bottom: 1px dashed #000; padding-bottom: 10px; margin-bottom: 10px; white-space: pre;">
+<div style="text-align: left; border-bottom: 1px dashed #000; padding-bottom: 5px; margin-bottom: 5px; white-space: pre; font-size: 11px;">
 ${productosHTML}
 </div>
 
-<div style="border-top: 2px solid #000; border-bottom: 2px solid #000; padding: 10px 0; margin: 10px 0; text-align: right; font-weight: bold; font-size: 14px;">
+<div style="border-top: 2px solid #000; border-bottom: 2px solid #000; padding: 5px 0; margin: 5px 0; text-align: right; font-weight: bold; font-size: 12px;">
 TOTAL PRODUCTOS: ${productos.length}
 </div>
 
-<div style="text-align: center; margin: 15px 0;">
+<div style="text-align: center; margin: 8px 0; font-size: 11px;">
 Gracias por tu compra! 🌻
 </div>
 
-<div style="border-top: 1px dashed #000; padding-top: 10px; text-align: center; font-size: 11px;">
+<div style="border-top: 1px dashed #000; padding-top: 5px; text-align: center; font-size: 10px;">
 📱 +54 9 1125328861
 📸 @elhuertodelucas
 </div>
