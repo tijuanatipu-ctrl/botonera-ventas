@@ -8,7 +8,7 @@ const PRODUCTOS_CONFIG = [
     { nombre: 'HOJAS ENSALADA [MEZCLUM] X350GR', precio: 4000, unidad: 'unidad', peso: '350 gr', emoji: '🥗' },
     { nombre: 'HUEVOS DE CAMPO [POR 1/2 DOC.]', precio: 2000, unidad: 'unidad', peso: '1/2 docena', emoji: '🥚' },
     { nombre: 'HUEVOS DE CAMPO [POR 1 DOC.]', precio: 4000, unidad: 'unidad', peso: '1 docena', emoji: '🥚' },
-    { nombre: 'HUEVOS DE CAMPO [MAPLE]', precio: 11000, unidad: 'unidad', peso: 'maple', emoji: '🥚' },
+    { nombre: 'HUEVOS DE CAMPO [MAPLE]', precio: 9000, unidad: 'unidad', peso: 'maple', emoji: '🥚' },
     { nombre: 'KALE [ATADO]', precio: 1800, unidad: 'atado', peso: '200 gr', emoji: '🥬' },
     { nombre: 'HOJAS ENSALADA A ELECCION [MEZCLUM]', precio: 4000, unidad: 'unidad', peso: '350 gr', emoji: '🥗' },
     { nombre: 'PLANTIN AROMATICA M12: Oregano, Menta Piperita.', precio: 1800, unidad: 'unidad', peso: '1000 gr', emoji: '🌿' },
