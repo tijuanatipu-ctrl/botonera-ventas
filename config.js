@@ -1,7 +1,7 @@
 // PRODUCTOS - Solo los activos (amarillos en el Sheet)
 const PRODUCTOS_CONFIG = [
     { nombre: 'MANDARINAS [POR PESO]', precio: 1500, unidad: 'kilo', peso: '2000 gr', emoji: '🍊' },
-    { nombre: 'ACELGA AGROECOLOGICA [ATADO]', precio: 2800, unidad: 'atado', peso: '800 gr', emoji: '🥬' },
+    { nombre: 'ACELGA AGROEC. [ATADO]', precio: 2800, unidad: 'atado', peso: '800 gr', emoji: '🥬' },
     { nombre: 'ACHICORIA [ATADO]', precio: 1200, unidad: 'unidad', peso: '200 gr', emoji: '🥗' },
     { nombre: 'CALABAZA [POR PESO]', precio: 1000, unidad: 'kilo', peso: '1000 gr', emoji: '🎃' },
     { nombre: 'CIBULLETE [ATADO]', precio: 1500, unidad: 'atado', peso: '25 gr', emoji: '🧅' },
@@ -13,11 +13,11 @@ const PRODUCTOS_CONFIG = [
     { nombre: 'HOJAS ENSALADA A ELECCION [MEZCLUM]', precio: 4000, unidad: 'unidad', peso: '350 gr', emoji: '🥗' },
     { nombre: 'PLANTIN AROMATICA M12: Oregano, Menta Piperita.', precio: 1800, unidad: 'unidad', peso: '1000 gr', emoji: '🌿' },
     { nombre: 'PLANTIN HUERTA M12: Tomates, lechugas, puerro, ceb. verdeo, calendula, etc.', precio: 1500, unidad: 'unidad', peso: '1000 gr', emoji: '🪴' },
-    { nombre: 'PUERRO AGROECOLOGICO [ATADO]', precio: 1800, unidad: 'atado', peso: '500 gr', emoji: '🌿' },
+    { nombre: 'PUERRO AGROEC. [ATADO]', precio: 1800, unidad: 'atado', peso: '500 gr', emoji: '🌿' },
     { nombre: 'RUCULA [MEZCLUM]', precio: 2000, unidad: 'kilo', peso: '200 gr', emoji: '🥗' },
     { nombre: 'OREGANO SECO', precio: 1800, unidad: 'unidad', peso: '31 gr', emoji: '🌿' },
     { nombre: 'Hinojo x Unidad', precio: 2100, unidad: 'unidad', peso: '450 gr', emoji: '🌿' },
-    { nombre: 'AJO GIGANTE CHILENO O ELEFANTE AGROECOLOGICO [POR UND.]', precio: 1000, unidad: 'unidad', peso: '60 gr', emoji: '🧄' },
-    { nombre: 'ACELGA AGROECOLOGICA x 2 [ATADO]', precio: 5000, unidad: 'atado', peso: '1600 gr', emoji: '🥬' },
-    { nombre: 'ALBAHACA AGROECOLOGICA [ATADO]', precio: 2000, unidad: 'atado', peso: '250 gr', emoji: '🌿' },
+    { nombre: 'AJO GIGANTE CHILENO O ELEFANTE AGROEC. [POR UND.]', precio: 1000, unidad: 'unidad', peso: '60 gr', emoji: '🧄' },
+    { nombre: '2 X ACELGA AGROEC. [ATADO]', precio: 5000, unidad: 'atado', peso: '1600 gr', emoji: '🥬' },
+    { nombre: 'ALBAHACA AGROEC. [ATADO]', precio: 2000, unidad: 'atado', peso: '250 gr', emoji: '🌿' },
 ];
