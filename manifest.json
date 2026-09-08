@@ -6,7 +6,7 @@
   "scope": "/botonera-ventas/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#7cb342",
+  "theme_color": "#FFC959",
   "orientation": "portrait-primary",
   "icons": [
     {
