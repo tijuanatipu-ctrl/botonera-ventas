@@ -18,5 +18,6 @@ const PRODUCTOS_CONFIG = [
     { nombre: 'OREGANO SECO', precio: 1800, unidad: 'unidad', peso: '31 gr', emoji: '🌿' },
     { nombre: 'Hinojo x Unidad', precio: 2100, unidad: 'unidad', peso: '450 gr', emoji: '🌿' },
     { nombre: 'AJO GIGANTE CHILENO O ELEFANTE AGROECOLOGICO [POR UND.]', precio: 1000, unidad: 'unidad', peso: '60 gr', emoji: '🧄' },
+    { nombre: 'ACELGA AGROECOLOGICA x 2 [ATADO]', precio: 5000, unidad: 'atado', peso: '1600 gr', emoji: '🥬' },
     { nombre: 'ALBAHACA AGROECOLOGICA [ATADO]', precio: 2000, unidad: 'atado', peso: '250 gr', emoji: '🌿' },
 ];
