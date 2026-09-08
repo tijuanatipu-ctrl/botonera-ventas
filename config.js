@@ -2,6 +2,7 @@
 const PRODUCTOS_CONFIG = [
     { nombre: 'PEREJIL AGROEC. [ATADO]', precio: 1000, unidad: 'atado', peso: '50 gr', emoji: '🌿' },
     { nombre: 'ACELGA AGROEC. [ATADO]', precio: 2800, unidad: 'atado', peso: '800 gr', emoji: '🥬' },
+    { nombre: 'ACELGA AGROEC. X 2 [ATADO]', precio: 2500, unidad: 'atado', peso: '800 gr', emoji: '🥬' },
     { nombre: 'ACHICORIA [ATADO]', precio: 1200, unidad: 'unidad', peso: '200 gr', emoji: '🥗' },
     { nombre: 'CALABAZA [POR PESO]', precio: 1000, unidad: 'kilo', peso: '1000 gr', emoji: '🎃' },
     { nombre: 'CIBULLETE [ATADO]', precio: 1500, unidad: 'atado', peso: '25 gr', emoji: '🧅' },
@@ -18,7 +19,6 @@ const PRODUCTOS_CONFIG = [
     { nombre: 'OREGANO DESHIDRATADO [POR PESO]', precio: 1800, unidad: 'unidad', peso: '31 gr', emoji: '🌿' },
     { nombre: 'HINOJO [POR UND.]', precio: 2100, unidad: 'unidad', peso: '450 gr', emoji: '🌿' },
     { nombre: 'AJO GIGANTE CHILENO AGROEC. [POR UND.]', precio: 1000, unidad: 'unidad', peso: '60 gr', emoji: '🧄' },
-    { nombre: 'ACELGA AGROEC. X 2 [ATADO]', precio: 2500, unidad: 'atado', peso: '800 gr', emoji: '🥬' },
     { nombre: 'ALBAHACA AGROEC. [ATADO]', precio: 2000, unidad: 'atado', peso: '250 gr', emoji: '🌿' },
     { nombre: 'MANDARINAS [POR PESO]', precio: 1500, unidad: 'kilo', peso: '2000 gr', emoji: '🍊' },
 ];
