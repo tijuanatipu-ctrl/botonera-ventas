@@ -21,4 +21,5 @@ const PRODUCTOS_CONFIG = [
     { nombre: 'AJO GIGANTE CHILENO AGROEC. [POR UND.]', precio: 1000, unidad: 'unidad', peso: '60 gr', emoji: '🧄' },
     { nombre: 'ALBAHACA AGROEC. [ATADO]', precio: 2000, unidad: 'atado', peso: '250 gr', emoji: '🌿' },
     { nombre: 'MANDARINAS [POR PESO]', precio: 1500, unidad: 'kilo', peso: '2000 gr', emoji: '🍊' },
+    { nombre: 'QUINOTO EN ALMIBAR [POR PESO]', precio: 6000, unidad: 'kilo', peso: '450 gr', emoji: '🫙' },
 ];
