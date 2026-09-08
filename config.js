@@ -2,7 +2,7 @@
 const PRODUCTOS_CONFIG = [
     { nombre: 'PEREJIL AGROEC. [ATADO]', precio: 1000, unidad: 'atado', peso: '50 gr', emoji: '🌿' },
     { nombre: 'ACELGA AGROEC. [ATADO]', precio: 2800, unidad: 'atado', peso: '800 gr', emoji: '🥬' },
-    { nombre: 'ACELGA AGROEC. X 2 [ATADO]', precio: 2500, unidad: 'atado', peso: '800 gr', emoji: '🥬' },
+    { nombre: 'ACELGA AGROEC. X 2 [C/U]', precio: 2500, unidad: 'atado', peso: '800 gr', emoji: '🥬' },
     { nombre: 'ACHICORIA [ATADO]', precio: 1200, unidad: 'unidad', peso: '200 gr', emoji: '🥗' },
     { nombre: 'CALABAZA [POR PESO]', precio: 1000, unidad: 'kilo', peso: '1000 gr', emoji: '🎃' },
     { nombre: 'CIBULLETE [ATADO]', precio: 1500, unidad: 'atado', peso: '25 gr', emoji: '🧅' },
